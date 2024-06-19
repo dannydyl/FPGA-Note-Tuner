@@ -44,7 +44,7 @@ architecture Behavioral of i2s_toplevel is
     SIGNAL wire_l_data_rx    :  STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  -- wire connection between i2s receiver and top level
     SIGNAL wire_r_data_rx    :  STD_LOGIC_VECTOR(d_width-1 DOWNTO 0);  -- wire connection between i2s receiver and top level
     
-     SIGNAL clk_in_bufg  :  STD_LOGIC;                             -- buffered clk_in signal
+--     SIGNAL clk_in_bufg  :  STD_LOGIC;                             -- buffered clk_in signal
  
     --declare PLL to create 12.29508 which is nearest to 12.288MHz master clock from 100 MHz system clock
         component clk_wiz_0
@@ -78,7 +78,7 @@ BEGIN
     --instantiate PLL to create master clock
     i2s_clock: clk_wiz_0 
     PORT MAP(
-             clk_in1 => clk_in_bufg, 
+             clk_in1 => clk_in, 
             resetn => reset_n,
             clk_out1 => master_clk);
   

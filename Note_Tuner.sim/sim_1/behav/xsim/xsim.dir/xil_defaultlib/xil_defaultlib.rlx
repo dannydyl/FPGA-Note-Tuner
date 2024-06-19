@@ -2,7 +2,9 @@
 2020.2
 Oct 13 2023
 20:47:58
-C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sim_1/new/Clock_Divider_tb.vhd,1718052748,vhdl,,,,clock_divider_tb,,,,,,,,
-C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sim_1/new/i2s_receiver_tb.vhd,1718137371,vhdl,,,,i2s_receiver_tb,,,,,,,,
-C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/Clock_Divider.vhd,1718133568,vhdl,C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sim_1/new/i2s_receiver_tb.vhd;C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/i2s_receiver.vhd,,,clock_divider,,,,,,,,
-C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/i2s_receiver.vhd,1718140701,vhdl,C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sim_1/new/i2s_receiver_tb.vhd,,,i2s_receiver,,,,,,,,
+C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v,1718687213,verilog,,,,clk_wiz_0,,,../../../../Note_Tuner.ip_user_files/ipstatic,,,,,
+C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v,1718687213,verilog,,C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v,,clk_wiz_0_clk_wiz,,,../../../../Note_Tuner.ip_user_files/ipstatic,,,,,
+C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,,,,,,,
+C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sim_1/new/i2s_toplevel_tb.vhd,1718765889,vhdl,,,,tb_i2s_toplevel,,,,,,,,
+C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/Clock_Divider.vhd,1718688345,vhdl,,,,i2s_receiver,,,,,,,,
+C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/i2s_receiver.vhd,1718741043,vhdl,,,,i2s_toplevel,,,,,,,,
