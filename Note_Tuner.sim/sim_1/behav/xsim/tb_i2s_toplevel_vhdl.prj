@@ -1,8 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  \
-"../../../../Note_Tuner.srcs/sources_1/new/Clock_Divider.vhd" \
-"../../../../Note_Tuner.srcs/sources_1/new/i2s_receiver.vhd" \
-"../../../../Note_Tuner.srcs/sim_1/new/i2s_toplevel_tb.vhd" \
-
-# Do not sort compile order
-nosort

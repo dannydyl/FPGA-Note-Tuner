@@ -23,28 +23,34 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity data_rx_to_fixed_point is
     Port (
-        clk          : in  std_logic;
+        clk_in          : in  std_logic;
         reset_n      : in  std_logic;
         left_data_rx : in  std_logic_vector(23 downto 0);
         right_data_rx: in  std_logic_vector(23 downto 0);
-        left_fixed   : out std_logic_vector(15 downto 0);
-        right_fixed  : out std_logic_vector(15 downto 0)
+        fixed_data : out std_logic_vector(15 downto 0)
     );
 end data_rx_to_fixed_point;
 
 architecture Behavioral of data_rx_to_fixed_point is
+    signal left_signed  : signed(23 downto 0);
+    signal right_signed : signed(23 downto 0);
+    signal average      : signed(24 downto 0);
 begin
-    process(clk)
+    process(clk_in)
     begin
-        if rising_edge(clk) then
+        if rising_edge(clk_in) then
             if reset_n = '0' then
-                left_fixed <= (others => '0');
-                right_fixed <= (others => '0');
+                fixed_data <= (others => '0');
             else
-            -- might need better approach such as normalizing and scaling before just simply truncating. study how other ppl did and make sure of this entity
-                -- Scale down 24-bit to 16-bit fixed-point (Q1.15)
-                left_fixed <= std_logic_vector(resize(signed(left_data_rx(23 downto 8)), 16));
-                right_fixed <= std_logic_vector(resize(signed(right_data_rx(23 downto 8)), 16));
+                -- Convert input to signed
+                left_signed <= signed(left_data_rx);
+                right_signed <= signed(right_data_rx);
+                
+                -- Average the left and right channel data
+                average <= (resize(left_signed, 24) + resize(right_signed, 24)) / 2;
+
+                -- Convert the average to Q1.15 fixed-point format
+                fixed_data <= std_logic_vector(resize(average(23 downto 8), 16));
             end if;
         end if;
     end process;
