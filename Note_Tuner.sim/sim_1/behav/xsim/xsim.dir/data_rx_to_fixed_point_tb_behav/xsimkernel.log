@@ -1,7 +1,0 @@
-Running: xsim.dir/data_rx_to_fixed_point_tb_behav/xsimk.exe -simmode gui -wdb data_rx_to_fixed_point_tb_behav.wdb -simrunnum 0 -socket 10065
-Design successfully loaded
-Design Loading Memory Usage: 8976 KB (Peak: 8976 KB)
-Design Loading CPU Usage: 15 ms
-Simulation completed
-Simulation Memory Usage: 9472 KB (Peak: 9472 KB)
-Simulation CPU Usage: 15 ms
