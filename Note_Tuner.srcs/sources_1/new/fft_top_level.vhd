@@ -27,7 +27,8 @@ entity fft_top_level is
         reset_n           : in  std_logic;  -- asynchronous reset
         fixed_data        : in  std_logic_vector(15 downto 0);
         data_valid        : in  std_logic;
-        fft_ready         : out std_logic;
+        data_last         : in std_logic; 
+        fft_ready         : out std_logic; --assert it when it is needed for higher top level, for now fft_ready is used for local signal for verification purpose
         fft_data_out      : out std_logic_vector(31 downto 0);
         fft_data_valid    : out std_logic
     );
@@ -58,9 +59,12 @@ architecture Behavioral of fft_top_level is
     signal sample_counter : integer := 0;
     constant FFT_LENGTH : integer := 1024;
     
+--    signal fft_ready : std_logic;
+    
     component xfft_0
         Port (
             aclk                    : in  std_logic;
+            aresetn                 : in std_logic;
             s_axis_config_tdata     : in  std_logic_vector(23 downto 0);
             s_axis_config_tvalid    : in  std_logic;
             s_axis_config_tready    : out std_logic;
@@ -79,54 +83,24 @@ architecture Behavioral of fft_top_level is
     end component;
 
 begin
-    -- Configuration process
-    process(clk_in, reset_n)
-    begin
-        if reset_n = '0' then
-            s_axis_config_tvalid <= '0';
-        elsif rising_edge(clk_in) then
-                if s_axis_config_tready = '1' then
-                    s_axis_config_tvalid <= '1';
-                else
-                    s_axis_config_tvalid <= '0';
-                end if;
-        end if;
-    end process;
 
-    -- Data input preparation process
-    process(clk_in, reset_n)
-    begin
-        if reset_n = '0' then
-            s_axis_data_tvalid <= '0';
-            s_axis_data_tdata <= (others => '0');
-        elsif rising_edge(clk_in) then
-                if data_valid = '1' then
-                    real_part <= fixed_data;
-                    s_axis_data_tdata <= imag_part & real_part; -- Combine real and imaginary parts
-                    s_axis_data_tvalid <= '1';
-                    
-                    if sample_counter = FFT_LENGTH - 1 then
-                        s_axis_data_tlast <= '1';   -- assert tlast for the last sample
-                        sample_counter <= 0;
-                    else
-                        s_axis_data_tlast <= '0'; -- deassert tlast
-                        sample_counter <= sample_counter + 1;
-                    end if;
-                else
-                    s_axis_data_tvalid <= '0';
-                end if;
-        end if;
-    end process;
 
+    s_axis_config_tvalid <= '1';
+    
+    s_axis_data_tdata <= imag_part & fixed_data; -- Combine real and imaginary parts
+    s_axis_data_tvalid <= data_valid;
+    s_axis_data_tlast <= data_last;
+    
     -- Connect internal signals to output ports
     fft_data_out <= fft_data_out_internal;
     fft_data_valid <= fft_data_valid_internal;
     fft_ready <= s_axis_data_tready;
-
+    
     -- Instantiate the FFT IP core
     your_instance_name : xfft_0
         Port map (
             aclk                    => clk_in,
+            aresetn                 => reset_n,
             s_axis_config_tdata     => s_axis_config_tdata,
             s_axis_config_tvalid    => s_axis_config_tvalid,
             s_axis_config_tready    => s_axis_config_tready,
@@ -143,4 +117,47 @@ begin
             event_data_in_channel_halt => event_data_in_channel_halt
         );
 
+
+
+--    -- Configuration process
+--    process(clk_in, reset_n)
+--    begin
+--        if reset_n = '0' then
+--            s_axis_config_tvalid <= '0';
+--        elsif rising_edge(clk_in) then
+--                if s_axis_config_tready = '1' then
+--                    s_axis_config_tvalid <= '1';
+--                else
+--                    s_axis_config_tvalid <= '0';
+--                end if;
+--        end if;
+--    end process;
+
+--    -- Data input preparation process
+--    process(clk_in, reset_n)
+--    begin
+--        if reset_n = '0' then
+--            s_axis_data_tvalid <= '0';
+--            s_axis_data_tdata <= (others => '0');
+--        elsif rising_edge(clk_in) then
+--            if event_frame_started = '1' then
+--                sample_counter <= 0;
+--            elsif data_valid = '1' and s_axis_data_tready = '1' then
+--                --real_part <= fixed_data;
+--    --                    if rising_edge(fft_ready) then
+--                    s_axis_data_tdata <= imag_part & fixed_data; -- Combine real and imaginary parts
+--                    s_axis_data_tvalid <= '1';
+--                    s_axis_data_tlast <= '0'; -- deassert tlast
+--                    sample_counter <= sample_counter + 1;
+--    --                        end if;
+--                if sample_counter = FFT_LENGTH - 1 then
+--                    s_axis_data_tlast <= '1';   -- assert tlast for the last sample
+--                    sample_counter <= 0;
+
+--                end if;
+--            else
+--            s_axis_data_tvalid <= '0';
+--        end if;
+--        end if;
+--    end process;
 end Behavioral;

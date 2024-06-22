@@ -4,6 +4,7 @@ onerror {quit -force}
 transcript on
 
 vlib work
+vlib activehdl/xpm
 vlib activehdl/xbip_utils_v3_0_11
 vlib activehdl/axi_utils_v2_0_7
 vlib activehdl/c_reg_fd_v12_0_7
@@ -21,6 +22,7 @@ vlib activehdl/floating_point_v7_0_21
 vlib activehdl/xfft_v9_1_10
 vlib activehdl/xil_defaultlib
 
+vmap xpm activehdl/xpm
 vmap xbip_utils_v3_0_11 activehdl/xbip_utils_v3_0_11
 vmap axi_utils_v2_0_7 activehdl/axi_utils_v2_0_7
 vmap c_reg_fd_v12_0_7 activehdl/c_reg_fd_v12_0_7
@@ -37,6 +39,12 @@ vmap cmpy_v6_0_22 activehdl/cmpy_v6_0_22
 vmap floating_point_v7_0_21 activehdl/floating_point_v7_0_21
 vmap xfft_v9_1_10 activehdl/xfft_v9_1_10
 vmap xil_defaultlib activehdl/xil_defaultlib
+
+vlog -work xpm  -sv2k12 -l xpm -l xbip_utils_v3_0_11 -l axi_utils_v2_0_7 -l c_reg_fd_v12_0_7 -l xbip_dsp48_wrapper_v3_0_5 -l xbip_pipe_v3_0_7 -l xbip_dsp48_addsub_v3_0_7 -l xbip_addsub_v3_0_7 -l c_addsub_v12_0_16 -l c_mux_bit_v12_0_7 -l c_shift_ram_v12_0_15 -l xbip_bram18k_v3_0_7 -l mult_gen_v12_0_19 -l cmpy_v6_0_22 -l floating_point_v7_0_21 -l xfft_v9_1_10 -l xil_defaultlib \
+"C:/Xilinx/Vivado/2023.2/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
+
+vcom -work xpm -93  \
+"C:/Xilinx/Vivado/2023.2/data/ip/xpm/xpm_VCOMP.vhd" \
 
 vcom -work xbip_utils_v3_0_11 -93  \
 "../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd" \
@@ -86,4 +94,7 @@ vcom -work xfft_v9_1_10 -93  \
 vcom -work xil_defaultlib -93  \
 "../../../../Note_Tuner.gen/sources_1/ip/xfft_0/sim/xfft_0.vhd" \
 
+
+vlog -work xil_defaultlib \
+"glbl.v"
 

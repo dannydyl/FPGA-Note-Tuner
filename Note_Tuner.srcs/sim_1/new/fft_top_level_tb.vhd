@@ -33,6 +33,7 @@ architecture Behavioral of fft_top_level_tb is
             reset_n           : in  std_logic;  -- asynchronous reset
             fixed_data        : in  std_logic_vector(15 downto 0);
             data_valid        : in  std_logic;
+            data_last         : in std_logic;
             fft_ready         : out std_logic;
             fft_data_out      : out std_logic_vector(31 downto 0);
             fft_data_valid    : out std_logic
@@ -47,10 +48,11 @@ architecture Behavioral of fft_top_level_tb is
     signal fft_ready      : std_logic;
     signal fft_data_out   : std_logic_vector(31 downto 0);
     signal fft_data_valid : std_logic;
-
+    signal data_last      : std_logic;
     -- Clock period definition
     constant clk_period : time := 10 ns;
-
+    
+    signal ct : integer := 0;
 begin
     -- Instantiate the DUT
     uut: fft_top_level
@@ -59,6 +61,7 @@ begin
             reset_n        => reset_n,
             fixed_data     => fixed_data,
             data_valid     => data_valid,
+            data_last      => data_last,
             fft_ready      => fft_ready,
             fft_data_out   => fft_data_out,
             fft_data_valid => fft_data_valid
@@ -73,6 +76,31 @@ begin
         wait for clk_period / 2;
     end process;
 
+    -- Sample data generation
+    sample : process
+    variable count : integer := 0;
+    begin
+        while true loop
+            wait until rising_edge(clk_in);
+            if fft_ready = '1' then
+                fixed_data <= std_logic_vector(to_unsigned(ct, 16));
+                data_valid <= '1';
+                ct <= ct + 1;
+                count := count + 1;
+                data_last <= '0';
+                if ct = 2048 then
+                    ct <= 0;
+                elsif count = 1023 then
+                    count := 0;
+                    data_last <= '1';
+                end if;
+                
+            else
+                data_valid <= '0';
+            end if;
+        end loop;
+    end process;
+
     -- Stimulus process
     stimulus_process : process
     begin
@@ -80,19 +108,9 @@ begin
         reset_n <= '0';
         wait for 20 ns;
         reset_n <= '1';
-        data_valid <= '1';
-        wait for 50ns;
-        -- Send input data samples
-        for i in 0 to 1023 loop
-            fixed_data <= std_logic_vector(to_unsigned(i, 16));
-            wait until rising_edge(clk_in);
-        end loop;
-        
-        wait for 100ns;
-        data_valid <= '0';
 
         -- Wait for some time to observe the output
-        wait for 200 ns;
+        wait for 10000 ns;
 
         -- Stop the simulation
         wait;

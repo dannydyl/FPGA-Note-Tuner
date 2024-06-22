@@ -1,3 +1,5 @@
+xpm_memory.sv,systemverilog,xpm,../../../../../../../../../../Xilinx/Vivado/2023.2/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv,
+xpm_VCOMP.vhd,vhdl,xpm,../../../../../../../../../../Xilinx/Vivado/2023.2/data/ip/xpm/xpm_VCOMP.vhd,
 xbip_utils_v3_0_vh_rfs.vhd,vhdl,xbip_utils_v3_0_11,../../../ipstatic/hdl/xbip_utils_v3_0_vh_rfs.vhd,
 axi_utils_v2_0_vh_rfs.vhd,vhdl,axi_utils_v2_0_7,../../../ipstatic/hdl/axi_utils_v2_0_vh_rfs.vhd,
 c_reg_fd_v12_0_vh_rfs.vhd,vhdl,c_reg_fd_v12_0_7,../../../ipstatic/hdl/c_reg_fd_v12_0_vh_rfs.vhd,
@@ -14,3 +16,4 @@ cmpy_v6_0_vh_rfs.vhd,vhdl,cmpy_v6_0_22,../../../ipstatic/hdl/cmpy_v6_0_vh_rfs.vh
 floating_point_v7_0_vh_rfs.vhd,vhdl,floating_point_v7_0_21,../../../ipstatic/hdl/floating_point_v7_0_vh_rfs.vhd,
 xfft_v9_1_vh_rfs.vhd,vhdl,xfft_v9_1_10,../../../ipstatic/hdl/xfft_v9_1_vh_rfs.vhd,
 xfft_0.vhd,vhdl,xil_defaultlib,../../../../Note_Tuner.gen/sources_1/ip/xfft_0/sim/xfft_0.vhd,
+glbl.v,Verilog,xil_defaultlib,glbl.v
