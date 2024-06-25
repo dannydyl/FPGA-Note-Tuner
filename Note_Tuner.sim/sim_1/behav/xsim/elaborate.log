@@ -12,11 +12,11 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
+Compiling package ieee.math_real
 Compiling package xbip_utils_v3_0_11.xbip_utils_v3_0_11_pkg
 Compiling package xfft_v9_1_10.xfft_v9_1_10_viv_comp
 Compiling package ieee.std_logic_arith
 Compiling package ieee.std_logic_unsigned
-Compiling package ieee.math_real
 Compiling package axi_utils_v2_0_7.axi_utils_v2_0_7_pkg
 Compiling package mult_gen_v12_0_19.mult_gen_v12_0_19_pkg
 Compiling package ieee.std_logic_signed

@@ -1,3 +1,141 @@
+------------------------------------------------------------------------------------
+---- Company: 
+---- Engineer: 
+---- 
+---- Create Date: 06/20/2024 10:16:51 PM
+---- Design Name: 
+---- Module Name: fft_top_level_tb - Behavioral
+---- Project Name: 
+---- Target Devices: 
+---- Tool Versions: 
+---- Description: 
+---- 
+---- Dependencies: 
+---- 
+---- Revision:
+---- Revision 0.01 - File Created
+---- Additional Comments:
+---- 
+------------------------------------------------------------------------------------
+
+--library IEEE;
+--use IEEE.STD_LOGIC_1164.ALL;
+--use IEEE.NUMERIC_STD.ALL;
+
+--entity fft_top_level_tb is
+--end fft_top_level_tb;
+
+--architecture Behavioral of fft_top_level_tb is
+--    -- Component declaration of the top-level design
+--    component fft_top_level
+--        Port (
+--            clk_in            : in  std_logic;
+--            reset_n           : in  std_logic;  -- asynchronous reset
+--            fixed_data        : in  std_logic_vector(15 downto 0);
+--            data_valid        : in  std_logic;
+--            data_last         : in std_logic;
+--            fft_ready         : out std_logic;
+--            fft_data_out      : out std_logic_vector(31 downto 0);
+--            fft_data_valid    : out std_logic
+--        );
+--    end component;
+
+--    -- Signals for driving the DUT (Device Under Test)
+--    signal clk_in         : std_logic := '0';
+--    signal reset_n        : std_logic := '0';
+--    signal fixed_data     : std_logic_vector(15 downto 0) := (others => '0');
+--    signal data_valid     : std_logic := '0';
+--    signal fft_ready      : std_logic;
+--    signal fft_data_out   : std_logic_vector(31 downto 0);
+--    signal fft_data_valid : std_logic;
+--    signal data_last      : std_logic;
+--    -- Clock period definition
+--    constant clk_period : time := 10 ns;
+    
+--    signal ct : integer := 0;
+--begin
+--    -- Instantiate the DUT
+--    uut: fft_top_level
+--        Port map (
+--            clk_in         => clk_in,
+--            reset_n        => reset_n,
+--            fixed_data     => fixed_data,
+--            data_valid     => data_valid,
+--            data_last      => data_last,
+--            fft_ready      => fft_ready,
+--            fft_data_out   => fft_data_out,
+--            fft_data_valid => fft_data_valid
+--        );
+
+--    -- Clock generation process
+--    clk_process : process
+--    begin
+--        clk_in <= '0';
+--        wait for clk_period / 2;
+--        clk_in <= '1';
+--        wait for clk_period / 2;
+--    end process;
+
+--    -- Sample data generation
+--    sample : process
+--    variable count : integer := 0;
+--    begin
+--        while true loop
+--            wait until rising_edge(clk_in);
+--            if fft_ready = '1' then
+----                fixed_data <= std_logic_vector(to_unsigned(ct, 16));
+--                fixed_data <= "0000000000000011";
+--                data_valid <= '1';
+--                ct <= ct + 1;
+--                count := count + 1;
+--                data_last <= '0';
+--                if ct = 2048 then
+--                    ct <= 0;
+--                elsif count = 1023 then
+--                    count := 0;
+--                    data_last <= '1';
+--                end if;
+                
+--            else
+--                data_valid <= '0';
+--            end if;
+--        end loop;
+--    end process;
+
+--    -- Stimulus process
+--    stimulus_process : process
+--    begin
+--        -- Reset the design
+--        reset_n <= '0';
+--        wait for 20 ns;
+--        reset_n <= '1';
+
+--        -- Wait for some time to observe the output
+--        wait for 10000 ns;
+
+--        -- Stop the simulation
+--        wait;
+--    end process;
+--end Behavioral;
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 06/20/2024 10:16:51 PM
+-- Design Name: 
+-- Module Name: fft_top_level_tb - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 -- Company: 
 -- Engineer: 
@@ -21,6 +159,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
+use IEEE.MATH_REAL.ALL; -- For sine function
 
 entity fft_top_level_tb is
 end fft_top_level_tb;
@@ -48,11 +187,19 @@ architecture Behavioral of fft_top_level_tb is
     signal fft_ready      : std_logic;
     signal fft_data_out   : std_logic_vector(31 downto 0);
     signal fft_data_valid : std_logic;
-    signal data_last      : std_logic;
+    signal data_last      : std_logic := '0';
+
     -- Clock period definition
     constant clk_period : time := 10 ns;
-    
-    signal ct : integer := 0;
+
+    -- Variables for sine wave generation
+    signal sample_index : integer := 0;
+    signal sample_count : integer := 0;
+    constant PI : real := 3.141592653589793;
+    constant FREQ : real := 1.0; -- Frequency of sine wave in Hz
+    constant SAMPLE_RATE : real := 1000.0; -- Sample rate in Hz
+    constant NUM_SAMPLES : integer := 1024; -- Number of samples per FFT frame
+
 begin
     -- Instantiate the DUT
     uut: fft_top_level
@@ -78,23 +225,26 @@ begin
 
     -- Sample data generation
     sample : process
-    variable count : integer := 0;
+    variable sine_value : real;
+    variable sine_int : integer;
     begin
         while true loop
             wait until rising_edge(clk_in);
             if fft_ready = '1' then
-                fixed_data <= std_logic_vector(to_unsigned(ct, 16));
+                -- Generate sine wave
+                sine_value := sin(2.0 * PI * FREQ * real(sample_index) / SAMPLE_RATE);
+                sine_int := integer(sine_value * 32767.0); -- Scale to 16-bit range
+                fixed_data <= std_logic_vector(to_signed(sine_int, 16));
                 data_valid <= '1';
-                ct <= ct + 1;
-                count := count + 1;
+                sample_index <= sample_index + 1;
+                sample_count <= sample_count + 1;
                 data_last <= '0';
-                if ct = 2048 then
-                    ct <= 0;
-                elsif count = 1023 then
-                    count := 0;
+                if sample_index = NUM_SAMPLES then
+                    sample_index <= 0;
+                elsif sample_count = NUM_SAMPLES - 1 then
+                    sample_count <= 0;
                     data_last <= '1';
                 end if;
-                
             else
                 data_valid <= '0';
             end if;
@@ -110,7 +260,7 @@ begin
         reset_n <= '1';
 
         -- Wait for some time to observe the output
-        wait for 10000 ns;
+        wait for 20000 ns;
 
         -- Stop the simulation
         wait;
