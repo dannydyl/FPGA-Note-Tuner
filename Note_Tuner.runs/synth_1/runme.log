@@ -272,3 +272,21 @@ Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:59 .
 Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:59 . Memory (MB): peak = 1291.418 ; gain = 817.371
 INFO: [Project 1-571] Translating synthesized netlist
 Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1294.305 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 183 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1318.352 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+The system cannot find the path specified.
+Synth Design complete | Checksum: 5808bfc0
+INFO: [Common 17-83] Releasing license: Synthesis
+28 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:24 ; elapsed = 00:01:02 . Memory (MB): peak = 1318.352 ; gain = 850.930
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1318.352 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.runs/synth_1/pre_fft_wrapper.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file pre_fft_wrapper_utilization_synth.rpt -pb pre_fft_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Jun 25 23:19:52 2024...

@@ -160,6 +160,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use IEEE.MATH_REAL.ALL; -- For sine function
+use std.textio.all; -- for file operations
 
 entity fft_top_level_tb is
 end fft_top_level_tb;
@@ -205,6 +206,7 @@ architecture Behavioral of fft_top_level_tb is
     signal mag : std_logic_vector(31 downto 0);
     signal index : integer := 1024;
     signal event_frame_started : std_logic;
+    
 begin
     -- Instantiate the DUT
     uut: fft_top_level
@@ -291,4 +293,28 @@ begin
         -- Stop the simulation
         wait;
     end process;
+    
+       -- Capture FFT output and write to file
+    process(clk_in)
+        -- File operations
+        file fft_output_file : text open write_mode is "C:\Users\danny\OneDrive\Desktop\FPGA\Note_Tuner\Note_Tuner.sim\sim_1\behav\xsim/fft_output.txt";
+        variable line_buf : line;
+        variable real_part : signed(15 downto 0);
+        variable imag_part : signed(15 downto 0);
+        variable data_written : boolean := false;
+    begin
+        if rising_edge(clk_in) then
+            if fft_data_valid = '1' then
+                real_part := signed(fft_data_out(15 downto 0));
+                imag_part := signed(fft_data_out(31 downto 16));
+                write(line_buf, integer'image(to_integer(real_part)) & " " & integer'image(to_integer(imag_part)));
+                writeline(fft_output_file, line_buf);
+                data_written := true;
+            end if;
+        end if;
+        if now = 20 ms then
+            assert data_written report "No data was written to the file" severity warning;
+        end if;
+    end process;
+
 end Behavioral;
