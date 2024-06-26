@@ -29,7 +29,7 @@ entity fixed_data_bram is
         reset_n : in std_logic;
         write_enable : in std_logic;
         write_data : in std_logic_vector(15 downto 0);
-        addr : in std_logic_vector(9 downto 0); -- 1024 addresses
+--        addr : in std_logic_vector(9 downto 0); -- 1024 addresses
         read_enable : out std_logic;
         read_data : out std_logic_vector(15 downto 0)      
         );
@@ -80,12 +80,12 @@ begin
         end if;
     end process;    
 
-    read : process(clk_in)
-    begin
-        if rising_edge(clk_in) then
-            read_data <= bram(to_integer(unsigned(addr)));
-        end if;
-    end process;
+--    read : process(clk_in)
+--    begin
+--        if rising_edge(clk_in) then
+--            read_data <= bram(to_integer(unsigned(addr)));
+--        end if;
+--    end process;
 
     
 end Behavioral;

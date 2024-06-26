@@ -24,7 +24,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity data_rx_to_fixed_point is
     Port (
 --        clk_in          : in  std_logic;
-        reset_n      : in  std_logic;
+--        reset_n      : in  std_logic;
         left_data_rx : in  std_logic_vector(23 downto 0);
         right_data_rx: in  std_logic_vector(23 downto 0);
         fixed_data : out std_logic_vector(15 downto 0)
@@ -34,7 +34,7 @@ end data_rx_to_fixed_point;
 architecture Behavioral of data_rx_to_fixed_point is
     signal left_signed  : signed(23 downto 0);
     signal right_signed : signed(23 downto 0);
-    signal average      : signed(24 downto 0);
+    signal average      : signed(23 downto 0);
 begin
 
 --                Convert input to signed

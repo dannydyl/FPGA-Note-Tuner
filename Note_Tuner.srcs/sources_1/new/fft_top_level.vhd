@@ -30,6 +30,8 @@ entity fft_top_level is
         data_last         : in std_logic; 
         fft_ready         : out std_logic; --assert it when it is needed for higher top level, for now fft_ready is used for local signal for verification purpose
         fft_data_out      : out std_logic_vector(31 downto 0);
+        event_frame_started : out std_logic;
+        mag               : out std_logic_vector(31 downto 0);  -- magnitude for test purposes
         fft_data_valid    : out std_logic
     );
 end fft_top_level;
@@ -51,7 +53,7 @@ architecture Behavioral of fft_top_level is
     signal real_part : std_logic_vector(15 downto 0);
     signal imag_part : std_logic_vector(15 downto 0) := (others => '0');
 
-    signal event_frame_started : std_logic;
+--    signal event_frame_started : std_logic;
     signal event_tlast_unexpected : std_logic;
     signal event_tlast_missing : std_logic;
     signal event_data_in_channel_halt : std_logic;
@@ -81,9 +83,26 @@ architecture Behavioral of fft_top_level is
             event_data_in_channel_halt : out std_logic
         );
     end component;
+    
+    signal im_mag : signed(15 downto 0);
+    signal r_mag  : signed(15 downto 0);
+    signal real_sq : unsigned(31 downto 0);
+    signal imag_sq : unsigned(31 downto 0);
+    signal mag_sq : unsigned(31 downto 0);
 
 begin
 
+    --calculating magnitude
+    r_mag <= signed(fft_data_out_internal(15 downto 0));
+    im_mag <= signed(fft_data_out_internal(31 downto 16));
+    
+    real_sq <= unsigned(r_mag) * unsigned(r_mag);
+    imag_sq <= unsigned(im_mag) * unsigned(im_mag);
+    
+    mag_sq <= real_sq + imag_sq;
+    
+    mag <= std_logic_vector(mag_sq);
+    
 
     s_axis_config_tvalid <= '1';
     

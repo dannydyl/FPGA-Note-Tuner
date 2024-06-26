@@ -175,7 +175,9 @@ architecture Behavioral of fft_top_level_tb is
             data_last         : in std_logic;
             fft_ready         : out std_logic;
             fft_data_out      : out std_logic_vector(31 downto 0);
-            fft_data_valid    : out std_logic
+            fft_data_valid    : out std_logic;
+            event_frame_started : out std_logic;
+            mag               : out std_logic_vector(31 downto 0)
         );
     end component;
 
@@ -197,9 +199,12 @@ architecture Behavioral of fft_top_level_tb is
     signal sample_count : integer := 0;
     constant PI : real := 3.141592653589793;
     constant FREQ : real := 1.0; -- Frequency of sine wave in Hz
-    constant SAMPLE_RATE : real := 1000.0; -- Sample rate in Hz
+    constant SAMPLE_RATE : real := 48000.0; -- Sample rate in Hz
     constant NUM_SAMPLES : integer := 1024; -- Number of samples per FFT frame
 
+    signal mag : std_logic_vector(31 downto 0);
+    signal index : integer := 1024;
+    signal event_frame_started : std_logic;
 begin
     -- Instantiate the DUT
     uut: fft_top_level
@@ -211,7 +216,9 @@ begin
             data_last      => data_last,
             fft_ready      => fft_ready,
             fft_data_out   => fft_data_out,
-            fft_data_valid => fft_data_valid
+            fft_data_valid => fft_data_valid,
+            event_frame_started => event_frame_started,
+            mag => mag
         );
 
     -- Clock generation process
@@ -238,19 +245,38 @@ begin
                 data_valid <= '1';
                 sample_index <= sample_index + 1;
                 sample_count <= sample_count + 1;
-                data_last <= '0';
+--                data_last <= '0';
                 if sample_index = NUM_SAMPLES then
                     sample_index <= 0;
                 elsif sample_count = NUM_SAMPLES - 1 then
                     sample_count <= 0;
-                    data_last <= '1';
+--                    data_last <= '1';
                 end if;
             else
                 data_valid <= '0';
             end if;
         end loop;
     end process;
-
+    
+    -- for event sync
+    process
+    begin
+    while true loop
+        wait until rising_edge(clk_in);
+            if event_frame_started = '1' then
+                index <= 0;
+                data_last <= '0';
+            else   
+                index <= index + 1;
+                data_last <= '0';
+                if index = 1021 then
+                    data_last <= '1';
+                    index <= 0;
+                 end if;
+            end if;
+    end loop;
+    end process;
+    
     -- Stimulus process
     stimulus_process : process
     begin
