@@ -37,7 +37,7 @@ entity fft_top_level is
 end fft_top_level;
 
 architecture Behavioral of fft_top_level is
-    signal s_axis_config_tdata : std_logic_vector(23 downto 0) := "000000001000000000001010"; -- Configuration data
+    signal s_axis_config_tdata : std_logic_vector(23 downto 0) := "101010101010101010101011"; -- Configuration data
     signal s_axis_config_tvalid : std_logic := '0';
     signal s_axis_config_tready : std_logic;
 
@@ -96,8 +96,8 @@ begin
     r_mag <= signed(fft_data_out_internal(15 downto 0));
     im_mag <= signed(fft_data_out_internal(31 downto 16));
     
-    real_sq <= unsigned(r_mag) * unsigned(r_mag);
-    imag_sq <= unsigned(im_mag) * unsigned(im_mag);
+    real_sq <= unsigned(r_mag * r_mag);
+    imag_sq <= unsigned(im_mag * im_mag);
     
     mag_sq <= real_sq + imag_sq;
     
