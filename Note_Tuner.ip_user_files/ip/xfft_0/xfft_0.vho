@@ -63,6 +63,7 @@ COMPONENT xfft_0
     s_axis_data_tready : OUT STD_LOGIC;
     s_axis_data_tlast : IN STD_LOGIC;
     m_axis_data_tdata : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+    m_axis_data_tuser : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
     m_axis_data_tvalid : OUT STD_LOGIC;
     m_axis_data_tlast : OUT STD_LOGIC;
     event_frame_started : OUT STD_LOGIC;
@@ -89,6 +90,7 @@ your_instance_name : xfft_0
     s_axis_data_tready => s_axis_data_tready,
     s_axis_data_tlast => s_axis_data_tlast,
     m_axis_data_tdata => m_axis_data_tdata,
+    m_axis_data_tuser => m_axis_data_tuser,
     m_axis_data_tvalid => m_axis_data_tvalid,
     m_axis_data_tlast => m_axis_data_tlast,
     event_frame_started => event_frame_started,

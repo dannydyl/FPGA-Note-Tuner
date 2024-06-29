@@ -32,12 +32,13 @@ entity fft_top_level is
         fft_data_out      : out std_logic_vector(31 downto 0);
         event_frame_started : out std_logic;
         mag               : out std_logic_vector(31 downto 0);  -- magnitude for test purposes
+        fft_index             : out std_logic_vector(10 downto 0);
         fft_data_valid    : out std_logic
     );
 end fft_top_level;
 
 architecture Behavioral of fft_top_level is
-    signal s_axis_config_tdata : std_logic_vector(23 downto 0) := "101010101010101010101011"; -- Configuration data
+    signal s_axis_config_tdata : std_logic_vector(23 downto 0) := "101010101010101010101011"; -- Configuration data / scaling at odd number stages
     signal s_axis_config_tvalid : std_logic := '0';
     signal s_axis_config_tready : std_logic;
 
@@ -49,6 +50,7 @@ architecture Behavioral of fft_top_level is
     signal fft_data_out_internal : std_logic_vector(31 downto 0);
     signal fft_data_valid_internal : std_logic;
     signal fft_data_tlast_internal : std_logic;
+    signal fft_m_axis_data_tuser : std_logic_vector(15 downto 0);
 
     signal real_part : std_logic_vector(15 downto 0);
     signal imag_part : std_logic_vector(15 downto 0) := (others => '0');
@@ -75,6 +77,7 @@ architecture Behavioral of fft_top_level is
             s_axis_data_tready      : out std_logic;
             s_axis_data_tlast       : in  std_logic;
             m_axis_data_tdata       : out std_logic_vector(31 downto 0);
+            m_axis_data_tuser       : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
             m_axis_data_tvalid      : out std_logic;
             m_axis_data_tlast       : out std_logic;
             event_frame_started     : out std_logic;
@@ -115,6 +118,7 @@ begin
     fft_data_valid <= fft_data_valid_internal;
     fft_ready <= s_axis_data_tready;
     
+    fft_index <= fft_m_axis_data_tuser(10 downto 0);
     -- Instantiate the FFT IP core
     your_instance_name : xfft_0
         Port map (
@@ -130,53 +134,10 @@ begin
             m_axis_data_tdata       => fft_data_out_internal,
             m_axis_data_tvalid      => fft_data_valid_internal,
             m_axis_data_tlast       => fft_data_tlast_internal,
+            m_axis_data_tuser       => fft_m_axis_data_tuser,
             event_frame_started     => event_frame_started,
             event_tlast_unexpected  => event_tlast_unexpected,
             event_tlast_missing     => event_tlast_missing,
             event_data_in_channel_halt => event_data_in_channel_halt
         );
-
-
-
---    -- Configuration process
---    process(clk_in, reset_n)
---    begin
---        if reset_n = '0' then
---            s_axis_config_tvalid <= '0';
---        elsif rising_edge(clk_in) then
---                if s_axis_config_tready = '1' then
---                    s_axis_config_tvalid <= '1';
---                else
---                    s_axis_config_tvalid <= '0';
---                end if;
---        end if;
---    end process;
-
---    -- Data input preparation process
---    process(clk_in, reset_n)
---    begin
---        if reset_n = '0' then
---            s_axis_data_tvalid <= '0';
---            s_axis_data_tdata <= (others => '0');
---        elsif rising_edge(clk_in) then
---            if event_frame_started = '1' then
---                sample_counter <= 0;
---            elsif data_valid = '1' and s_axis_data_tready = '1' then
---                --real_part <= fixed_data;
---    --                    if rising_edge(fft_ready) then
---                    s_axis_data_tdata <= imag_part & fixed_data; -- Combine real and imaginary parts
---                    s_axis_data_tvalid <= '1';
---                    s_axis_data_tlast <= '0'; -- deassert tlast
---                    sample_counter <= sample_counter + 1;
---    --                        end if;
---                if sample_counter = FFT_LENGTH - 1 then
---                    s_axis_data_tlast <= '1';   -- assert tlast for the last sample
---                    sample_counter <= 0;
-
---                end if;
---            else
---            s_axis_data_tvalid <= '0';
---        end if;
---        end if;
---    end process;
 end Behavioral;

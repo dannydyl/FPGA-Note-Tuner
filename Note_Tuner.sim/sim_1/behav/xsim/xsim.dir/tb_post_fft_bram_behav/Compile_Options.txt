@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" -L "xpm" --snapshot "tb_post_fft_bram_behav" "xil_defaultlib.tb_post_fft_bram" -log "elaborate.log" 

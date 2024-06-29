@@ -3,8 +3,8 @@
   <File Type="PA-TCL" Name="pre_fft_wrapper.tcl"/>
   <File Type="REPORTS-TCL" Name="pre_fft_wrapper_reports.tcl"/>
   <File Type="RDS-RDS" Name="pre_fft_wrapper.vds"/>
-  <File Type="RDS-UTIL" Name="fft_top_level_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="fft_top_level_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="post_fft_bram_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="post_fft_bram_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="pre_fft_wrapper.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>

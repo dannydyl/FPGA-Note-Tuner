@@ -65,6 +65,7 @@ xfft_0 your_instance_name (
   .s_axis_data_tready(s_axis_data_tready),                  // output wire s_axis_data_tready
   .s_axis_data_tlast(s_axis_data_tlast),                    // input wire s_axis_data_tlast
   .m_axis_data_tdata(m_axis_data_tdata),                    // output wire [31 : 0] m_axis_data_tdata
+  .m_axis_data_tuser(m_axis_data_tuser),                    // output wire [15 : 0] m_axis_data_tuser
   .m_axis_data_tvalid(m_axis_data_tvalid),                  // output wire m_axis_data_tvalid
   .m_axis_data_tlast(m_axis_data_tlast),                    // output wire m_axis_data_tlast
   .event_frame_started(event_frame_started),                // output wire event_frame_started

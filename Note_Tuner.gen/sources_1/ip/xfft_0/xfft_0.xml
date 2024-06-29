@@ -752,7 +752,7 @@
         </spirit:parameter>
         <spirit:parameter>
           <spirit:name>TUSER_WIDTH</spirit:name>
-          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.M_AXIS_DATA.TUSER_WIDTH">0</spirit:value>
+          <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="BUSIFPARAM_VALUE.M_AXIS_DATA.TUSER_WIDTH">16</spirit:value>
           <spirit:vendorExtensions>
             <xilinx:parameterInfo>
               <xilinx:parameterUsage>none</xilinx:parameterUsage>
@@ -1008,11 +1008,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:10 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1023,7 +1023,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1037,11 +1037,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:11 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1099,11 +1099,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:10 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:e0d8e2ab</spirit:value>
+            <spirit:value>9:336649aa</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1118,11 +1118,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:10 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1138,11 +1138,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:10 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:e0d8e2ab</spirit:value>
+            <spirit:value>9:336649aa</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1200,11 +1200,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:10 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1220,11 +1220,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:10 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1240,11 +1240,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 28 03:57:16 UTC 2024</spirit:value>
+            <spirit:value>Fri Jun 28 21:37:11 UTC 2024</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:160e4cd2</spirit:value>
+            <spirit:value>9:1e9225bd</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1433,7 +1433,7 @@
         <spirit:wire>
           <spirit:direction>out</spirit:direction>
           <spirit:vector>
-            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_M_AXIS_DATA_TUSER_WIDTH&apos;)) - 1)">0</spirit:left>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_M_AXIS_DATA_TUSER_WIDTH&apos;)) - 1)">15</spirit:left>
             <spirit:right spirit:format="long">0</spirit:right>
           </spirit:vector>
           <spirit:wireTypeDefs>
@@ -1447,7 +1447,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.m_axis_data_tuser" xilinx:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_XK_INDEX&apos;)) = 1) or ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_SCALING&apos;)) = 1) and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_BFP&apos;)) = 1)) or (spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_OVFLO&apos;)) = 1 and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_SCALING&apos;)) = 1 and spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_BFP&apos;)) = 0) or spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_FLT_PT&apos;)) = 1))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.m_axis_data_tuser" xilinx:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_XK_INDEX&apos;)) = 1) or ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_SCALING&apos;)) = 1) and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_BFP&apos;)) = 1)) or (spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_OVFLO&apos;)) = 1 and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_SCALING&apos;)) = 1 and spirit:decode(id(&apos;MODELPARAM_VALUE.C_HAS_BFP&apos;)) = 0) or spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_FLT_PT&apos;)) = 1))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -1725,7 +1725,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_M_AXIS_DATA_TUSER_WIDTH</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_M_AXIS_DATA_TUSER_WIDTH">1</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_M_AXIS_DATA_TUSER_WIDTH">16</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_M_AXIS_STATUS_TDATA_WIDTH</spirit:name>
@@ -1805,7 +1805,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_HAS_XK_INDEX</spirit:name>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_XK_INDEX">0</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.C_HAS_XK_INDEX">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>C_DATA_MEM_TYPE</spirit:name>
@@ -2528,7 +2528,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>xk_index</spirit:name>
-      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.xk_index" spirit:order="16">false</spirit:value>
+      <spirit:value spirit:format="bool" spirit:resolve="user" spirit:id="PARAM_VALUE.xk_index" spirit:order="16">true</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>throttle_scheme</spirit:name>
@@ -2586,6 +2586,7 @@
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_DATA.TDATA_NUM_BYTES" xilinx:valueSource="auto"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_DATA.TDEST_WIDTH" xilinx:valueSource="constant"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_DATA.TID_WIDTH" xilinx:valueSource="constant"/>
+        <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_DATA.TUSER_WIDTH" xilinx:valueSource="auto"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_STATUS.HAS_TKEEP" xilinx:valueSource="constant"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_STATUS.HAS_TLAST" xilinx:valueSource="constant"/>
         <xilinx:configElementInfo xilinx:referenceId="BUSIFPARAM_VALUE.M_AXIS_STATUS.HAS_TREADY" xilinx:valueSource="auto"/>
@@ -2618,6 +2619,7 @@
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.target_clock_frequency" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.throttle_scheme" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.transform_length" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.xk_index" xilinx:valueSource="user"/>
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
