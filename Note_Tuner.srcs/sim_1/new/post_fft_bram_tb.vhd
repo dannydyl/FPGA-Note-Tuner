@@ -83,7 +83,7 @@ begin
         wait for 100 ns;
 
         -- Writing data to BRAM
-        for i in 0 to 512 loop
+        for i in 0 to 511 loop
             write_enable <= '1';
             fft_index <= std_logic_vector(to_unsigned(i, 10));
             mag_in <= std_logic_vector(to_unsigned(i * 2, 32));
@@ -92,16 +92,18 @@ begin
 
         -- Finish writing
         write_enable <= '0';
-        wait for clk_period;
+        wait for 20 ns;
 
         -- Check if read is ready
---        wait until read_ready = '1';
+        wait until read_ready = '1';
 
         -- Reading data from BRAM
---        for i in 0 to 512 loop
---            fft_index <= std_logic_vector(to_unsigned(i, 10));
---            wait for clk_period;
---        end loop;
+        for i in 0 to 511 loop
+            wait for clk_period;
+            assert mag_out = std_logic_vector(to_unsigned(i * 2, 32))
+                report "Test failed at index " & integer'image(i)
+                severity error;
+        end loop;
 
         -- Test finished
         wait;

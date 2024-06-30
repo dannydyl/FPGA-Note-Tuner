@@ -1,4 +1,0 @@
-Running: xsim.dir/tb_post_fft_bram_behav/xsimk.exe -simmode gui -wdb tb_post_fft_bram_behav.wdb -simrunnum 0 -socket 5415
-Design successfully loaded
-Design Loading Memory Usage: 8484 KB (Peak: 8484 KB)
-Design Loading CPU Usage: 0 ms

@@ -54,7 +54,7 @@ begin
                             state <= '1';  -- Transition to read state
                         end if;
                     end if;
-                when '1' =>  -- Read state
+                when others =>  -- Read state
                     read_ready <= '1';
                     mag_out <= bram(to_integer(read_addr));
                     if read_addr < 511 then
@@ -62,6 +62,7 @@ begin
                     else
                         read_addr <= (others => '0');
                         state <= '0';  -- Transition back to write state
+                        read_ready <= '0';
                     end if;
             end case;
         end if;
