@@ -1,7 +1,7 @@
 Vivado Simulator v2023.2
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot tb_post_fft_bram_behav xil_defaultlib.tb_post_fft_bram -log elaborate.log 
+Running: C:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip -L xpm --snapshot tb_peak_detector_behav xil_defaultlib.tb_peak_detector -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Completed static elaboration
@@ -12,6 +12,6 @@ Compiling package std.standard
 Compiling package std.textio
 Compiling package ieee.std_logic_1164
 Compiling package ieee.numeric_std
-Compiling architecture behavioral of entity xil_defaultlib.post_fft_bram [post_fft_bram_default]
-Compiling architecture behavioral of entity xil_defaultlib.tb_post_fft_bram
-Built simulation snapshot tb_post_fft_bram_behav
+Compiling architecture behavioral of entity xil_defaultlib.peak_detector [peak_detector_default]
+Compiling architecture behavioral of entity xil_defaultlib.tb_peak_detector
+Built simulation snapshot tb_peak_detector_behav

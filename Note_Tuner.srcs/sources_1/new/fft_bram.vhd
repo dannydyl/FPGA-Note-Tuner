@@ -36,19 +36,6 @@ end fft_top_level_with_magnitude_bram;
 
 architecture Behavioral of fft_top_level_with_magnitude_bram is
 
-    component fft_top_level
-        Port (
-            clk_in            : in  std_logic;
-            reset_n           : in  std_logic;
-            fixed_data        : in  std_logic_vector(15 downto 0);
-            data_valid        : in  std_logic;
-            data_last         : in  std_logic;
-            fft_ready         : out std_logic;
-            fft_data_out      : out std_logic_vector(31 downto 0);
-            fft_data_valid    : out std_logic
-        );
-    end component;
-
     component fft_output_bram
         Port (
             clk_in            : in  std_logic;
@@ -71,18 +58,6 @@ architecture Behavioral of fft_top_level_with_magnitude_bram is
 
 begin
 
-    -- Instantiate the FFT Core
-    fft_inst : fft_top_level
-        Port map (
-            clk_in            => clk_in,
-            reset_n           => reset_n,
-            fixed_data        => fixed_data,
-            data_valid        => data_valid,
-            data_last         => data_last,
-            fft_ready         => fft_ready,
-            fft_data_out      => fft_data_out_internal,
-            fft_data_valid    => fft_data_valid_internal
-        );
 
     -- Calculate Magnitude
     process(clk_in, reset_n)
