@@ -40,35 +40,30 @@ architecture Behavioral of post_fft_bram is
     signal addr : std_logic_vector(9 downto 0);
     signal read_addr : unsigned(9 downto 0) := (others => '0');
     signal write_done : std_logic := '0';
+    signal state : std_logic := '0';
 begin
-    write: process(clk_in)
+    process(clk_in)
     begin
         if rising_edge(clk_in) then
-            if write_enable = '1' then
-                bram(to_integer(unsigned(fft_index))) <= mag_in;
-                read_ready <= '0';
-                write_done <= '0';
-            end if;
-            if fft_index = std_logic_vector(to_unsigned(511, 10)) then
-                write_done <= '1';
-            end if; 
-            addr <= fft_index;
-        end if;
-    end process;
-    
-    read : process(clk_in)
-    begin
-        if rising_edge(clk_in) then
-            if write_done = '1' then
-                read_ready <= '1';
-                mag_out <= bram(to_integer(read_addr));
-                if read_addr < 511 then
-                    read_addr <= read_addr + 1;
-                else
-                    read_addr <= (others => '0');
-                    write_done <= '0';
-                end if;
-            end if;
+            case state is
+                when '0' =>  -- Write state
+                    if write_enable = '1' then
+                        bram(to_integer(unsigned(fft_index))) <= mag_in;
+                        read_ready <= '0';
+                        if fft_index = std_logic_vector(to_unsigned(511, 10)) then
+                            state <= '1';  -- Transition to read state
+                        end if;
+                    end if;
+                when '1' =>  -- Read state
+                    read_ready <= '1';
+                    mag_out <= bram(to_integer(read_addr));
+                    if read_addr < 511 then
+                        read_addr <= read_addr + 1;
+                    else
+                        read_addr <= (others => '0');
+                        state <= '0';  -- Transition back to write state
+                    end if;
+            end case;
         end if;
     end process;
 
