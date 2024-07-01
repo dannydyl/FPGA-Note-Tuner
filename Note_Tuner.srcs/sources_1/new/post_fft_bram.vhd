@@ -57,7 +57,7 @@ begin
                 when others =>  -- Read state
                     read_ready <= '1';
                     mag_out <= bram(to_integer(read_addr));
-                    if read_addr < 511 then
+                    if read_addr < 512 then
                         read_addr <= read_addr + 1;
                     else
                         read_addr <= (others => '0');

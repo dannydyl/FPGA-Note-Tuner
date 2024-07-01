@@ -1,0 +1,1 @@
+--incr --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" -L "xpm" --snapshot "tb_post_fft_wrapper_behav" "xil_defaultlib.tb_post_fft_wrapper" -log "elaborate.log" 

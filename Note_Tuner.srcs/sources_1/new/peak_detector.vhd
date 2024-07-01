@@ -36,9 +36,9 @@ architecture Behavioral of peak_detector is
     signal max_mag : std_logic_vector(31 downto 0) := (others => '0');
     signal current_index : unsigned(9 downto 0) := (others => '0'); -- 9 bits for 512 indexes
     signal max_index : unsigned(9 downto 0) := (others => '0');
-    signal detecting : std_logic := '0';
-    signal frequency : unsigned(15 downto 0);
+    signal frequency : unsigned(15 downto 0) := (others => '0');
     constant FREQUENCY_RESOLUTION : unsigned(31 downto 0) := to_unsigned(469, 32); -- 46.875 Hz scaled by 10
+    signal debug : std_logic := '0';
 begin
 
     process(clk_in)
@@ -52,7 +52,9 @@ begin
                 if current_index < 511 then
                     current_index <= current_index + 1;
                 else
-                    frequency <= resize(max_index * FREQUENCY_RESOLUTION / 1000, 16); -- scale down by 1000 to get correct frequency
+                    debug <= '1';
+                    -- Divide by 1000 to get the correct frequency
+                    frequency <= resize((max_index * FREQUENCY_RESOLUTION) / 1000, 16);
                     peak_frequency <= std_logic_vector(resize(frequency, 16));
                     max_mag <= (others => '0');
                     current_index <= (others => '0');
