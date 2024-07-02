@@ -27,7 +27,6 @@ entity peak_detector is
     port(
         clk_in              : in std_logic;
         bram_data           : in std_logic_vector(31 downto 0);
-        bram_data_out       : out std_logic_vector(31 downto 0); -- debugging purpose
         read_ready          : in std_logic;
         read_addr           : in unsigned(9 downto 0);
         peak_frequency      : out std_logic_vector(15 downto 0)
@@ -42,7 +41,6 @@ architecture Behavioral of peak_detector is
     constant FREQUENCY_RESOLUTION : unsigned(7 downto 0) := to_unsigned(47, 8); -- 46.875 Hz scaled by 10
     signal debug : std_logic := '0';
 begin
-    bram_data_out <= bram_data;
     process(clk_in)
     begin
         if rising_edge(clk_in) then

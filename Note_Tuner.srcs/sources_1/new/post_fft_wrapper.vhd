@@ -29,7 +29,6 @@ entity post_fft_wrapper is
         mag_in              : in std_logic_vector(31 downto 0);
         fft_index           : in std_logic_vector(9 downto 0);
         write_enable        : in std_logic;
-        bram_data_out       : out std_logic_vector(31 downto 0);
         peak_frequency      : out std_logic_vector(15 downto 0)
     );
 end post_fft_wrapper;
@@ -57,7 +56,6 @@ begin
         port map (
             clk_in          => clk_in,
             bram_data       => mag_out,
-            bram_data_out   => bram_data_out,
             read_ready      => read_ready,
             read_addr       => read_addr,
             peak_frequency  => peak_frequency

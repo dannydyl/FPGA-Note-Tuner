@@ -31,7 +31,6 @@ entity fft_post_fft_wrapper_DUT is
         data_valid      : in std_logic;
         data_last       : in std_logic;
         fft_ready       : out std_logic;
-        bram_data_out   : out std_logic_vector(31 downto 0);
         peak_frequency  : out std_logic_vector(15 downto 0)
     );
 end fft_post_fft_wrapper_DUT;
@@ -60,7 +59,6 @@ architecture Behavioral of fft_post_fft_wrapper_DUT is
             mag_in              : in std_logic_vector(31 downto 0);
             fft_index           : in std_logic_vector(9 downto 0);
             write_enable        : in std_logic;
-            bram_data_out       : out std_logic_vector(31 downto 0);
             peak_frequency      : out std_logic_vector(15 downto 0)
         );
     end component;
@@ -100,7 +98,6 @@ begin
             mag_in              => mag,
             fft_index           => fft_index_out(9 downto 0), -- Taking the lower 10 bits
             write_enable        => fft_data_valid,           -- Assuming write_enable is tied to fft_data_valid
-            bram_data_out       => bram_data_out,
             peak_frequency      => peak_frequency
         );
 end Behavioral;
