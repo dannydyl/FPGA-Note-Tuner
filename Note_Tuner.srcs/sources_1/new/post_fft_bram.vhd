@@ -30,6 +30,7 @@ entity post_fft_bram is
         fft_index       : in std_logic_vector(9 downto 0);
         mag_in          : in std_logic_vector(31 downto 0);
         mag_out         : out std_logic_vector(31 downto 0);
+        read_addr       : out unsigned(9 downto 0) := (others => '0');
         read_ready      : out std_logic
     );
 end post_fft_bram;
@@ -37,9 +38,6 @@ end post_fft_bram;
 architecture Behavioral of post_fft_bram is
     type bram_type is array (0 to 512) of std_logic_vector(31 downto 0);
     signal bram : bram_type := (others => ( others => '0'));
-    signal addr : std_logic_vector(9 downto 0);
-    signal read_addr : unsigned(9 downto 0) := (others => '0');
-    signal write_done : std_logic := '0';
     signal state : std_logic := '0';
 begin
     process(clk_in)
