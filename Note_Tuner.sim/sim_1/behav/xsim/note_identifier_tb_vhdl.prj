@@ -1,0 +1,10 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Note_Tuner.srcs/sources_1/new/UART_TX.vhd" \
+"../../../../Note_Tuner.srcs/sources_1/new/debounce_frequency.vhd" \
+"../../../../Note_Tuner.srcs/sources_1/new/freq_analyzer.vhd" \
+"../../../../Note_Tuner.srcs/sources_1/new/note_identifier.vhd" \
+"../../../../Note_Tuner.srcs/sim_1/new/note_identifier_tb.vhd" \
+
+# Do not sort compile order
+nosort

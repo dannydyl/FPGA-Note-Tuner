@@ -28,6 +28,7 @@ entity debounce_frequency is
         clk_in      : in std_logic;
         reset_n     : in std_logic;
         frequency   : in std_logic_vector(15 downto 0);
+        send_ready  : out std_logic := '0';
         debounced_frequency : out std_logic_vector(15 downto 0)
     );
 end debounce_frequency;
@@ -43,7 +44,7 @@ architecture Behavioral of debounce_frequency is
     -- Counter signal for wait state
     signal wait_counter : unsigned(12 downto 0) := (others => '0');  -- 13 bits to count up to 5000
 
-    constant WAIT_COUNT : unsigned(12 downto 0) := to_unsigned(5000, 13);
+    constant WAIT_COUNT : unsigned(12 downto 0) := to_unsigned(500, 13);
 begin
 
     -- state register process
@@ -51,6 +52,7 @@ begin
     begin
         if reset_n = '0' then
             current_state <= init_state;
+            send_ready <= '0';
         elsif rising_edge(clk_in) then
             current_state <= next_state;
             if current_state = wait_for_state then
@@ -72,6 +74,7 @@ begin
             when init_state =>
                 debounced_frequency_internal <= (others => '0');
                 next_state <= get_peak_frequency_state;
+                send_ready <= '0';
                 
             when get_peak_frequency_state =>
                 debounced_frequency_internal <= frequency;
@@ -91,7 +94,8 @@ begin
                     debounced_frequency <= (others => '0');
                 end if;
                 next_state <= init_state;                
-         
+                send_ready <= '1';
+        
             when others =>
                 next_state <= init_state;
         end case;   

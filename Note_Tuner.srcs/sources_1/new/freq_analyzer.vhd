@@ -29,7 +29,7 @@ entity freq_analyzer is
         clk_in           : in  std_logic;
         reset_n         : in  std_logic;
         frequency     : in  std_logic_vector(15 downto 0);
-        note_ascii    : out std_logic_vector(63 downto 0)  -- 8 characters * 8 bits = 64 bits
+        note_ascii    : out std_logic_vector(7 downto 0)  -- 8 characters * 8 bits = 64 bits
     );
 end freq_analyzer;
 
@@ -44,10 +44,6 @@ begin
         elsif rising_edge(clk_in) then
             freq <= unsigned(frequency);
 
-            -- Check for failure case (frequency is all zeros)
-            if freq = 0 then
-                note_ascii <= "01000110010000010100100101001100010101010101001001000101"; -- "FAILURE"
-            else
                 -- Determine the note based on frequency ranges
                 -- 4th octave full notes
                 if (freq >= to_unsigned(256, 16) and freq < to_unsigned(279, 16)) then
@@ -68,7 +64,7 @@ begin
                     note_ascii <= (others => '0'); -- Default case, invalid frequency range
                 end if;
             end if;
-        end if;
+
     end process;
 
 
