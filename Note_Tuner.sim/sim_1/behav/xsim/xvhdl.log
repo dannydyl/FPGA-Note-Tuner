@@ -1,10 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/UART_TX.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'UART_TX'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/debounce_frequency.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'debounce_frequency'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/freq_analyzer.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'freq_analyzer'
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/note_identifier.vhd" into library xil_defaultlib
-INFO: [VRFC 10-3107] analyzing entity 'note_identifier'
 INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sim_1/new/note_identifier_tb.vhd" into library xil_defaultlib
 INFO: [VRFC 10-3107] analyzing entity 'note_identifier_tb'

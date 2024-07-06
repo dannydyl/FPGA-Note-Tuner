@@ -45,6 +45,9 @@ architecture Behavioral of debounce_frequency is
     signal wait_counter : unsigned(12 downto 0) := (others => '0');  -- 13 bits to count up to 5000
 
     constant WAIT_COUNT : unsigned(12 downto 0) := to_unsigned(500, 13);
+    
+    -- debug
+    signal debug : std_logic := '0';
 begin
 
     -- state register process
@@ -52,7 +55,6 @@ begin
     begin
         if reset_n = '0' then
             current_state <= init_state;
-            send_ready <= '0';
         elsif rising_edge(clk_in) then
             current_state <= next_state;
             if current_state = wait_for_state then
@@ -68,7 +70,7 @@ begin
     end process;
     
     -- next state logic process
-    process(current_state)
+    process(current_state, clk_in)
     begin
         case current_state is
             when init_state =>
@@ -81,7 +83,8 @@ begin
                 next_state <= wait_for_state;
                 
             when wait_for_state =>
-                if wait_counter >= WAIT_COUNT then
+                if wait_counter = WAIT_COUNT then
+                debug <= '1';
                     next_state <= output_state;
                 else
                     next_state <= wait_for_state;

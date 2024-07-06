@@ -32,7 +32,9 @@ architecture Behavioral of note_identifier_tb is
             clk_in          : in  std_logic;
             reset_n         : in  std_logic;
             raw_frequency   : in  std_logic_vector(15 downto 0);
-            uart_tx_serial  : out std_logic
+            uart_tx_serial  : out std_logic;
+            uart_tx_done    : out std_logic;
+            uart_tx_active  : out std_logic
         );
     end component;
 
@@ -44,6 +46,8 @@ architecture Behavioral of note_identifier_tb is
     signal reset_n        : std_logic := '0';
     signal raw_frequency  : std_logic_vector(15 downto 0) := (others => '0');
     signal uart_tx_serial : std_logic;
+    signal uart_tx_done : std_logic;
+    signal uart_tx_active   : std_logic;
 
 begin
 
@@ -53,7 +57,9 @@ begin
             clk_in          => clk_in,
             reset_n         => reset_n,
             raw_frequency   => raw_frequency,
-            uart_tx_serial  => uart_tx_serial
+            uart_tx_serial  => uart_tx_serial,
+            uart_tx_done    => uart_tx_done,
+            uart_tx_active  => uart_tx_active
         );
 
     -- Clock generation process
