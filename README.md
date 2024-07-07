@@ -4,7 +4,7 @@
 This project involves designing a guitar tuner using an Artix-7 FPGA from Xilinx. The tuner processes 24-bit, 48 kHz stereo audio input, performs Fast Fourier Transform (FFT) to analyze frequencies, and identifies the note being played. The results are then transmitted via UART to a terminal in ASCII code to indicate the detected note. This project was developed from scratch by me, demonstrating the use of various FPGA components and techniques.
 
 ## Block Diagram
-![Block Diagram](path_to_block_diagram_image)
+![Block Diagram](note_tuner_block_diagram.drawio.png)
 
 ## Project Description
 
