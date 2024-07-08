@@ -1,0 +1,91 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Mon Jul  8 00:00:04 2024
+| Host         : LAPTOP-Q89KUD17 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file Note_tuner_top_level_control_sets_placed.rpt
+| Design       : Note_tuner_top_level
+| Device       : xc7a35t
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    13 |
+|    Minimum number of control sets                        |    13 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    50 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    13 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     2 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     1 |
+| >= 16              |     5 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              43 |           13 |
+| No           | No                    | Yes                    |              72 |           21 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              23 |            6 |
+| Yes          | No                    | Yes                    |              70 |           18 |
+| Yes          | Yes                   | No                     |              22 |            6 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------------------------------------------------------------------------+------------------------------------------+----------------------------------------------------+------------------+----------------+--------------+
+|                                  Clock Signal                                  |               Enable Signal              |                  Set/Reset Signal                  | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------------------------------------------------------------------+------------------------------------------+----------------------------------------------------+------------------+----------------+--------------+
+|  note_id_inst/debounce_frequency_inst/send_ready_reg_i_1_n_0                   |                                          |                                                    |                1 |              1 |         1.00 |
+|  clk_internal                                                                  | note_id_inst/UART_TX/o_TX_Serial_i_1_n_0 |                                                    |                1 |              1 |         1.00 |
+|  clk_internal                                                                  | note_id_inst/UART_TX/r_TX_Data_0         |                                                    |                2 |              5 |         2.50 |
+|  clk_internal                                                                  | note_id_inst/UART_TX/E[0]                | i2s_inst/i2s_transceiver_0/reset_n                 |                1 |              5 |         5.00 |
+|  clk_internal                                                                  |                                          | i2s_inst/i2s_transceiver_0/reset_n                 |                4 |              7 |         1.75 |
+|  clk_internal                                                                  | reset_n_IBUF                             | note_id_inst/debounce_frequency_inst/wait_counter0 |                2 |              8 |         4.00 |
+|  clk_internal                                                                  |                                          |                                                    |                3 |             10 |         3.33 |
+|  clk_internal                                                                  | note_id_inst/UART_TX/r_Clk_Count         | note_id_inst/UART_TX/r_Clk_Count0                  |                4 |             14 |         3.50 |
+| ~note_id_inst/debounce_frequency_inst/FSM_sequential_current_state_reg_n_0_[1] |                                          |                                                    |                4 |             16 |         4.00 |
+|  note_id_inst/debounce_frequency_inst/debounced_frequency_reg[15]_i_2_n_0      |                                          |                                                    |                5 |             16 |         3.20 |
+|  clk_internal                                                                  | reset_n_IBUF                             |                                                    |                3 |             17 |         5.67 |
+|  i2s_inst/i2s_clock/inst/clk_out1                                              |                                          | i2s_inst/i2s_transceiver_0/reset_n                 |               17 |             65 |         3.82 |
+|  i2s_inst/i2s_clock/inst/clk_out1                                              | i2s_inst/i2s_transceiver_0/p_0_in        | i2s_inst/i2s_transceiver_0/reset_n                 |               17 |             65 |         3.82 |
++--------------------------------------------------------------------------------+------------------------------------------+----------------------------------------------------+------------------+----------------+--------------+
+
+

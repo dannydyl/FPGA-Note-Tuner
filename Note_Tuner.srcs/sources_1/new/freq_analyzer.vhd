@@ -61,7 +61,7 @@ begin
                 elsif (freq >= to_unsigned(467, 16) and freq < to_unsigned(523, 16)) then
                     note_ascii <= "01000010"; -- ASCII for 'B'
                 else
-                    note_ascii <= (others => '0'); -- Default case, invalid frequency range
+                    note_ascii <= "00111111"; -- Default case, invalid frequency range
                 end if;
             end if;
 

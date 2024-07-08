@@ -49,7 +49,7 @@ architecture Behavioral of note_identifier is
     --DEBUG
     signal debug : std_logic := '0';
     
-    constant CLEAR_SCREEN : std_logic_vector(7 downto 0) := "00001100";  -- ASCII for Form Feed (FF)
+    constant CLEAR_SCREEN : std_logic_vector(7 downto 0) := "00001100";  -- ASCII for Form Feed (FF)"00001100";
 begin
 
     -- Instantiate debounce_frequency
@@ -72,7 +72,7 @@ begin
         );
 
      UART_TX : entity work.UART_TX
-        generic map(g_CLKS_PER_BIT => 9600)
+        generic map(g_CLKS_PER_BIT => 10417)
         port map (
             i_Clk       => clk_in,
             i_TX_DV     => uart_tx_dv,
@@ -81,44 +81,6 @@ begin
             o_TX_Serial => uart_tx_serial,
             o_TX_Done   => uart_tx_done_internal
         );
-        
-         -- UART data transmission process
---    process(clk_in, reset_n)
---    variable index : integer := 0;
---    begin
---        if reset_n = '0' then
---            uart_tx_dv <= '0';
---            uart_tx_byte <= CLEAR_SCREEN;
---            uart_tx_data_valid <= '0';
---        elsif rising_edge(clk_in) then
---            if send_ready = '1' then
---                if uart_tx_done = '1' then
---                    uart_tx_dv <= '0';  -- Deassert data valid signal once transmission is done
---                    if index < 7 then
---                        index := index + 1;
---                    else
---                        index := 0;
---                    end if;
---            elsif uart_tx_active = '0' then
---                -- ASCII note transmission logic
---                if uart_tx_data_valid = '0' then
---                    if  debug = '0' then
---                        debug <= '1';
---                    else
---                        debug <= '0';
---                    end if;
---                    uart_tx_byte <= note_ascii;  -- Send first character of note
---                    uart_tx_data_valid <= '1';
---                    uart_tx_dv <= '1';
---                else
---                    uart_tx_data_valid <= '0';
---                    uart_tx_dv <= '0';
---                end if;
---            end if;
---        end if;
---     end if;
---    end process;
-
     -- buffer
     uart_tx_active <= uart_tx_active_internal;
     uart_tx_done <= uart_tx_done_internal;
@@ -127,7 +89,7 @@ begin
     process(clk_in, reset_n)
     begin
         if reset_n = '0' then
-            uart_tx_dv <= '0';
+            uart_tx_dv <= '1';
             uart_tx_byte <= CLEAR_SCREEN;
         elsif rising_edge(clk_in) then
             if send_ready = '1' then

@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.runs/synth_1/pre_fft_wrapper.tcl"
+  variable script "C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.runs/synth_1/Note_tuner_top_level.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,14 +70,18 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 2
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
+set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
 set_property webtalk.parent_dir C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.cache/wt [current_project]
 set_property parent.project_path C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.xpr [current_project]
+set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
 set_property ip_output_repo c:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.cache/ip [current_project]
@@ -85,11 +89,32 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/Clock_Divider.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/UART_TX.vhd
   C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/data_rx_to_fixed_point.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/debounce_frequency.vhd
   C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/fixed_data_bram.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/freq_analyzer.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/note_identifier.vhd
   C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/pre_fft_wrapper.vhd
 }
+read_vhdl -vhdl2008 -library xil_defaultlib {
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/i2s_receiver.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/fft_post_fft_wrapper_DUT.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/fft_top_level.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/peak_detector.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/post_fft_bram.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/post_fft_wrapper.vhd
+  C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/Note_tuner_top_level.vhd
+}
 read_vhdl -vhdl2019 -library xil_defaultlib C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/new/window_function.vhd
+read_ip -quiet C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/ip/xfft_0/xfft_0.xci
+
+read_ip -quiet C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+set_property used_in_implementation false [get_files -all c:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
+
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -99,13 +124,18 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/constrs_1/new/note_tuner_constraint.xdc
+set_property used_in_implementation false [get_files C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/constrs_1/new/note_tuner_constraint.xdc]
+
+read_xdc dont_touch.xdc
+set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 
 read_checkpoint -auto_incremental -incremental C:/Users/danny/OneDrive/Desktop/FPGA/Note_Tuner/Note_Tuner.srcs/utils_1/imports/synth_1/i2s_toplevel.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top pre_fft_wrapper -part xc7a35tcpg236-1
+synth_design -top Note_tuner_top_level -part xc7a35tcpg236-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -115,10 +145,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef pre_fft_wrapper.dcp
+write_checkpoint -force -noxdef Note_tuner_top_level.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file pre_fft_wrapper_utilization_synth.rpt -pb pre_fft_wrapper_utilization_synth.pb"
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file Note_tuner_top_level_utilization_synth.rpt -pb Note_tuner_top_level_utilization_synth.pb"
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

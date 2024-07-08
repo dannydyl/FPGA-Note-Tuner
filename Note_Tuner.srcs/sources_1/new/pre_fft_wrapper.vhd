@@ -44,6 +44,7 @@ architecture Behavioral of pre_fft_wrapper is
     signal write_enable     : std_logic := '0';
     signal read_data        : std_logic_vector(15 downto 0);
     signal read_addr        : std_logic_vector(9 downto 0) := (others => '0'); -- Address signal for BRAM
+    signal read_enable_internal : std_logic;
 
     -- Instantiate data_rx_to_fixed_point
     component data_rx_to_fixed_point is
@@ -102,6 +103,7 @@ begin
      
     data_valid <= '1';
     write_enable <= window_valid;   
+    read_enable_out <= read_enable_internal;
      
     -- Instantiate fixed_data_bram
     bram_inst : fixed_data_bram
@@ -110,7 +112,7 @@ begin
             reset_n      => reset_n,
             write_enable => write_enable,
             write_data   => windowed_data,
-            read_enable  => read_enable_out,
+            read_enable  => read_enable_internal,
             read_data    => read_data_out
         );
 

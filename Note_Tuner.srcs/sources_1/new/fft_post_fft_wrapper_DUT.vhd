@@ -23,19 +23,18 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 
-entity fft_post_fft_wrapper_DUT is
+entity fft_post_fft_wrapper is
     port(
         clk_in          : in std_logic;
         reset_n         : in std_logic;
         fixed_data      : in std_logic_vector(15 downto 0);
         data_valid      : in std_logic;
-        data_last       : in std_logic;
         fft_ready       : out std_logic;
         peak_frequency  : out std_logic_vector(15 downto 0)
     );
-end fft_post_fft_wrapper_DUT;
+end fft_post_fft_wrapper;
 
-architecture Behavioral of fft_post_fft_wrapper_DUT is
+architecture Behavioral of fft_post_fft_wrapper is
    -- Declare components
     component fft_top_level
         Port (
@@ -64,15 +63,16 @@ architecture Behavioral of fft_post_fft_wrapper_DUT is
     end component;
 
     -- Signal declarations
-    signal fft_ready_internal  : std_logic;
+--    signal fft_ready_internal  : std_logic;
     signal fft_data_out        : std_logic_vector(31 downto 0);
     signal event_frame_started : std_logic;
     signal mag                 : std_logic_vector(31 downto 0);
     signal fft_index_out       : std_logic_vector(10 downto 0);
     signal fft_data_valid      : std_logic;
-    signal mag_in              : std_logic_vector(31 downto 0);
-    signal fft_index_in        : std_logic_vector(9 downto 0);
-    signal write_enable        : std_logic;
+--    signal mag_in              : std_logic_vector(31 downto 0);
+--    signal fft_index_in        : std_logic_vector(9 downto 0);
+--    signal write_enable        : std_logic;
+    signal data_last           : std_logic;
 
 begin
     -- Instantiate fft_top_level

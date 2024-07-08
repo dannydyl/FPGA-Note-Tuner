@@ -24,7 +24,7 @@ eval( EAInclude(ISEJScriptLib) );
 
 
 ISEStep( "vivado",
-         "-log pre_fft_wrapper.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source pre_fft_wrapper.tcl" );
+         "-log Note_tuner_top_level.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Note_tuner_top_level.tcl" );
 
 
 
