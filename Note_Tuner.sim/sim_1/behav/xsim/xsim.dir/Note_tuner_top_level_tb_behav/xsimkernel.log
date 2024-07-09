@@ -1,0 +1,7 @@
+Running: xsim.dir/Note_tuner_top_level_tb_behav/xsimk.exe -simmode gui -wdb Note_tuner_top_level_tb_behav.wdb -simrunnum 0 -socket 7297
+Design successfully loaded
+Design Loading Memory Usage: 13400 KB (Peak: 13400 KB)
+Design Loading CPU Usage: 46 ms
+Simulation completed
+Simulation Memory Usage: 24528 KB (Peak: 24528 KB)
+Simulation CPU Usage: 374468 ms

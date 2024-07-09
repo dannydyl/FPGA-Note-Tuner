@@ -44,7 +44,7 @@ architecture Behavioral of debounce_frequency is
     -- Counter signal for wait state
     signal wait_counter : unsigned(12 downto 0) := (others => '0');  -- 13 bits to count up to 5000
 
-    constant WAIT_COUNT : unsigned(12 downto 0) := to_unsigned(500, 13);
+    constant WAIT_COUNT : unsigned(12 downto 0) := to_unsigned(50000, 13);
     
     -- debug
     signal debug : std_logic := '0';
