@@ -7,7 +7,7 @@ This project involves designing a guitar tuner using an Artix-7 FPGA from Xilinx
 ![Block Diagram](note_tuner_block_diagram.drawio.png)
 
 ## Sub-Project: I2S Demo
-This sub-project focuses on analyzing the audio signal using I2S BRAM and transmitting the audio signal over UART. The captured data are then fetched and plotted using MATLAB code to visualize the audio signals. For more information about this sub-project, [click here]([#](https://github.com/dannydyl/FPGA-i2s-demo)).
+This sub-project focuses on analyzing the audio signal using I2S BRAM and transmitting the audio signal over UART. The captured data are then fetched and plotted using MATLAB code to visualize the audio signals. For more information about this sub-project, [click here][https://github.com/dannydyl/FPGA-i2s-demo].
 
 ## Project Description
 
