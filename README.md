@@ -22,8 +22,8 @@ The `pre_fft_wrapper` module prepares the captured audio data for FFT analysis. 
 - **Window Function**: Applies a Hann window function to tailor the sampling using the window function module (`window_function`).
 - **Data Storage**: Stores the processed data in Block RAM (BRAM) using the fixed data BRAM module (`fixed_data_bram`) before FFT processing.
 
-### FFT Post-FFT Wrapper (`fft_post_fft_wrapper_DUT`)
-The `fft_post_fft_wrapper_DUT` module performs a radix-2 FFT on the prepared audio data and identifies the peak frequency. Key functions include:
+### FFT Post-FFT Wrapper (`fft_post_fft_wrapper`)
+The `fft_post_fft_wrapper` module performs a radix-2 FFT on the prepared audio data and identifies the peak frequency. Key functions include:
 - **FFT Processing**: Performs FFT using an AXI stream protocol with an FFT size of 1024 points. This is handled by the FFT IP core (`xfft_0`).
 - **Magnitude Calculation**: Calculates the magnitude of the frequency components using the peak detector module (`peak_detector`).
 - **Data Storage**: Stores the data and magnitudes in BRAM both pre- and post-FFT using the post FFT BRAM module (`post_fft_bram`).
