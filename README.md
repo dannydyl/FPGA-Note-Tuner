@@ -56,6 +56,3 @@ All user-specified timing constraints are met, with no setup, hold, or pulse wid
 
 ## Conclusion
 The FPGA Guitar Tuner project successfully integrates multiple modules to process audio input, perform FFT analysis, identify musical notes, and transmit the results via UART in ASCII code. The design meets all specified timing constraints, ensuring reliable operation at the intended clock frequency. The use of BRAM for data storage, Hann window function, radix-2 FFT, AXI stream, and fixed-point format ensures efficient and accurate processing. All components were verified using DUT/testbenches, and internal signal verification was performed using the Integrated Logic Analyzer (ILA).
-
-## License
-This project is licensed under the MIT License.
